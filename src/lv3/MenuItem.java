@@ -1,3 +1,5 @@
+package lv3;
+
 public class MenuItem {
     // 속성
     String name;
