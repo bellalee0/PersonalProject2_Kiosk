@@ -12,4 +12,7 @@ public class MenuItem {
     }
 
     // 기능
+    public String toString() {
+        return name + " | W " + price + " | " + description;
+    }
 }
