@@ -25,20 +25,18 @@ public class Kiosk {
         }
         System.out.println("0. 종료");
 
-        boolean run = true;
         int order;
-        while (run) {
+        while (true) {
             System.out.print("주문 번호를 입력하세요: ");
             try {
                 order = scanner.nextInt();
-
-                switch (order) {
-                    case 0 -> {
-                        System.out.println("프로그램을 종료합니다.");
-                        run = false;
-                    }
-                    case 1, 2, 3, 4 -> System.out.println("주문 내용: " + menuItems.get(order-1));
-                    default -> System.out.println("잘못된 번호입니다. 1부터 4까지의 번호를 입력해주세요.");
+                if (order == 0) {
+                    System.out.println("프로그램을 종료합니다.");
+                    break;
+                } else if (order >= 1 && order <= menuItems.size()) {
+                    System.out.println("주문 내용: " + menuItems.get(order-1));
+                } else {
+                    System.out.println("잘못된 번호입니다. 1부터 " + menuItems.size() + "까지의 번호를 입력해주세요.");
                 }
             } catch (InputMismatchException e) {
                 System.out.println("숫자만 입력해주세요.");
