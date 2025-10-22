@@ -18,22 +18,32 @@ public class Main {
             System.out.println(menuItem);
         }
 
+        boolean run = true;
         int order;
-        while (true) {
+        while (run) {
             System.out.print("주문 번호를 입력하세요: ");
             try {
                 order = scanner.nextInt();
 
-                if (order == 0) {
-                    System.out.println("프로그램을 종료합니다.");
-                    break;
-                } else if (order >= 1 && order <= (menu.length - 1)) {
-                    System.out.println("주문 내용: " + menu[order]);
-                    System.out.println("주문이 완료되었습니다.");
-                    break;
-                } else {
-                    System.out.println("잘못된 번호입니다. 1부터 " + (menu.length - 1) +"까지의 번호를 입력해주세요.");
+                switch (order) {
+                    case 0 -> {
+                        System.out.println("프로그램을 종료합니다.");
+                        run = false;
+                    }
+                    case 1, 2, 3, 4 -> System.out.println("주문 내용: " + menu[order]);
+                    default -> System.out.println("잘못된 번호입니다. 1부터 " + (menu.length - 1) +"까지의 번호를 입력해주세요.");
                 }
+
+//                if (order == 0) {
+//                    System.out.println("프로그램을 종료합니다.");
+//                    break;
+//                } else if (order >= 1 && order <= (menu.length - 1)) {
+//                    System.out.println("주문 내용: " + menu[order]);
+//                    System.out.println("주문이 완료되었습니다.");
+//                    break;
+//                } else {
+//                    System.out.println("잘못된 번호입니다. 1부터 " + (menu.length - 1) +"까지의 번호를 입력해주세요.");
+//                }
             } catch (InputMismatchException e) {
                 System.out.println("숫자만 입력해주세요.");
                 scanner.next();
