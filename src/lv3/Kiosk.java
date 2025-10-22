@@ -10,8 +10,8 @@ public class Kiosk {
     List<MenuItem> menuItems = new ArrayList<>();
 
     // 생성자
-    Kiosk(List<MenuItem> menuItems) {
-        this.menuItems = new ArrayList<>(menuItems);
+    Kiosk(List<MenuItem> menus) {
+        this.menuItems = new ArrayList<>(menus);
     }
 
     // 기능
