@@ -12,7 +12,10 @@ public class Main {
         Menu burgers = new Menu("Burgers");
         burgers.saveMenus(List.of(ShackBurger, SmokeShack, Cheeseburger, Hamburger));
 
+        Menu drinks = new Menu("Drinks");
+        Menu desserts = new Menu("Desserts");
+
         Kiosk kiosk = new Kiosk();
-        kiosk.start(burgers);
+        kiosk.start(List.of(burgers, drinks, desserts));
     }
 }
