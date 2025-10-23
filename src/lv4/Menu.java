@@ -16,7 +16,7 @@ public class Menu {
 
     // toString 오버라이드
     @Override
-    public String toString() { return categoryName; }
+    public String toString() { return categoryName.toUpperCase(); }
 
     // MenuItem 객체를 리스트에 저작
     void saveMenus(List<MenuItem> menus) { this.menuItems = new ArrayList<>(menus); }
