@@ -5,13 +5,13 @@ import java.util.List;
 
 public class Menu {
     // 속성
-    List<MenuItem> menuItems = new ArrayList<>();
+    List<MenuItem> menuItems;
     String categoryName;
 
     // 생성자(오버라이드)
-    Menu() {}
     Menu(String categoryName) {
         this.categoryName = categoryName;
+        this.menuItems = new ArrayList<>();
     }
 
     // toString 오버라이드
