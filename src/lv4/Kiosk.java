@@ -22,6 +22,7 @@ public class Kiosk {
         System.out.println("0. 뒤로 가기");
     }
 
+    // getNumber(String, List<?>) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
     private int getNumber(String name, List<?> nameOfList) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
