@@ -11,7 +11,6 @@ public class Menu {
     // 생성자(오버라이드)
     Menu(String categoryName) {
         this.categoryName = categoryName;
-        this.menuItems = new ArrayList<>();
     }
 
     // toString 오버라이드
