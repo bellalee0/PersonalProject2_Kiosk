@@ -7,6 +7,8 @@ public class MenuItem {
     private String description;
 
     // 생성자
+    MenuItem() {}
+
     MenuItem(String name, String price, String description) {
         if (name.trim().isEmpty() || price.trim().isEmpty()) throw new IllegalArgumentException("메뉴명과 가격은 필수입니다.");
         this.name = name;
@@ -19,5 +21,11 @@ public class MenuItem {
     @Override
     public String toString() {
         return name + " | W " + price + " | " + description;
+    }
+
+    void setMenuItem(String name, double price, String description) {
+        this.name = name;
+        this.price = price;
+        this.description = description;
     }
 }
