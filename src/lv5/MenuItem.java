@@ -15,8 +15,9 @@ public class MenuItem {
     }
 
     // 기능
-    // getter : 메뉴명, 가격, 설명글 출력
-    String getMenuItem() {
+    // toString 오버라이드
+    @Override
+    public String toString() {
         return name + " | W " + price + " | " + description;
     }
 }

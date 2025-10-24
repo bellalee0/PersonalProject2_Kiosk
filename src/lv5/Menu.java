@@ -24,7 +24,7 @@ public class Menu {
     // 리스트에 있는 MenuItem을 순차적으로 프린트
     void printMenus() {
         for (int i = 1; i <= menuItems.size(); i++) {
-            System.out.println(i + ". " + menuItems.get(i - 1).getMenuItem());
+            System.out.println(i + ". " + menuItems.get(i - 1));
         }
     }
 }
