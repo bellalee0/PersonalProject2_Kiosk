@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Menu {
     // 속성
-    List<MenuItem> menuItems;
-    String categoryName;
+    private List<MenuItem> menuItems;
+    private String categoryName;
 
     // 생성자(오버라이드)
     Menu(String categoryName) {
@@ -17,6 +17,10 @@ public class Menu {
     // toString 오버라이드
     @Override
     public String toString() { return categoryName.toUpperCase(); }
+
+    List<MenuItem> getMenu() {
+        return this.menuItems;
+    }
 
     // MenuItem 객체를 리스트에 저작
     void saveMenus(List<MenuItem> menus) { this.menuItems = new ArrayList<>(menus); }
