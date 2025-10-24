@@ -23,9 +23,10 @@ public class MenuItem {
         return name + " | W " + price + " | " + description;
     }
 
-    void setMenuItem(String name, double price, String description) {
+    void setMenuItem(String name, String price, String description) {
+        if (name.trim().isEmpty() || name == null || price.trim().isEmpty() || price == null) throw new IllegalArgumentException("메뉴명과 가격은 필수입니다.");
         this.name = name;
-        this.price = price;
+        this.price = Double.parseDouble(price);
         this.description = description;
     }
 }
