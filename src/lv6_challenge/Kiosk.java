@@ -62,16 +62,17 @@ public class Kiosk {
                 }
             } else if (selectedCategoryNumber == categories.size()+1) {
                 // [Order Menu]의 Orders 선택 시
-                System.out.println("[ Orders ]");
+                System.out.println("[ Orders(" + cart.getCartItems().size() + ") ]");
                 cart.printCartItems();
-                System.out.println("\n[ Total ]");
-                // 총 금액 출력
+                System.out.println("[ Total ]");
+                System.out.println("W" + cart.getTotalPrice());
                 System.out.println("주문하시겠습니까?");
                 System.out.println("1. 확인      | 2. 취소 (장바구니 초기화)");
                 int checkAddingToCart = checkYesOrNo();
                 if (checkAddingToCart == 1) {
                     // 최종 금액 출력 후 프로세스 종료
-                    System.out.println("주문이 완료되었습니다. 총 n개 메뉴, 금액은 W --- 입니다.");
+                    System.out.println("주문이 완료되었습니다. 총 " + cart.getCartItems().size() + "개 메뉴, 금액은 W " + cart.getTotalPrice() + " 입니다.");
+                    System.out.println("프로그램이 종료됩니다.");
                     execution = false;
                 } else if (checkAddingToCart == 2) {
                     // 장바구니 초기화
@@ -81,7 +82,6 @@ public class Kiosk {
                 }
             } else if (selectedCategoryNumber == categories.size()+2) {
                 // [Order Menu]의 Cancel 선택 시
-                // 장바구니 전체 초기화 + 원하는 메뉴만 삭제
                 System.out.println("원하는 작업을 선택해주세요.");
                 System.out.println("1. 전체 삭제    | 2. 특정 주문만 삭제");
                 int checkRemoveRange = checkYesOrNo();
