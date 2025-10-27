@@ -24,8 +24,8 @@ public class Kiosk {
             if (selectedCategoryNumber == 0) {
                 System.out.println("프로그램을 종료합니다.");
                 execution = false;
-            // 범위 내 숫자 입력 시
             } else if (selectedCategoryNumber >= 1 && selectedCategoryNumber <= categories.size()) {
+                // 범위 내 숫자 입력 시
                 boolean ordering = true;
                 while (ordering) {
                     // 해당 번호의 메뉴 출력
@@ -37,8 +37,8 @@ public class Kiosk {
                         System.out.println("MAIN MENU로 돌아갑니다.");
                         delay(300);
                         ordering = false;
-                    // 범위 내 숫자 입력 시
                     } else if (selectedOrderNumber >= 1 || selectedOrderNumber <= categories.get(selectedCategoryNumber - 1).getMenu().size()) {
+                        // 범위 내 숫자 입력 시
                         // 주문 내용 프린트
                         System.out.println("주문 내용: " + categories.get(selectedCategoryNumber - 1).getMenu().get(selectedOrderNumber-1));
                         delay(500);
@@ -46,6 +46,7 @@ public class Kiosk {
                         System.out.println("1. 확인      | 2. 취소");
                         int checkAddingToCart = checkYesOrNo();
                         if (checkAddingToCart == 1) {
+                            // 장바구니에 추가 O
                             cart.saveItem(categories.get(selectedCategoryNumber - 1).getMenu().get(selectedOrderNumber-1));
                             cart.printCartItems();
                             System.out.println("장바구니에 추가되었습니다.");
@@ -53,6 +54,7 @@ public class Kiosk {
                             delay(500);
                             ordering = false;
                         } else if (checkAddingToCart == 2) {
+                            // 장바구니에 추가 X
                             System.out.println("주문을 취소합니다.");
                             System.out.println("MAIN MENU로 돌아갑니다.");
                             delay(500);
@@ -70,12 +72,12 @@ public class Kiosk {
                 System.out.println("1. 확인      | 2. 취소 (장바구니 초기화)");
                 int checkAddingToCart = checkYesOrNo();
                 if (checkAddingToCart == 1) {
-                    // 최종 금액 출력 후 프로세스 종료
+                    // 주문 O : 최종 금액 출력 후 프로세스 종료
                     System.out.println("주문이 완료되었습니다. 총 " + cart.getCartItems().size() + "개 메뉴, 금액은 W " + cart.getTotalPrice() + " 입니다.");
                     System.out.println("프로그램이 종료됩니다.");
                     execution = false;
                 } else if (checkAddingToCart == 2) {
-                    // 장바구니 초기화
+                    // 주문 X : 장바구니 초기화
                     cart.clearCart();
                     System.out.println("장바구니가 초기화되었습니다. 주문을 다시 시작합니다.");
                     delay(500);
@@ -86,10 +88,12 @@ public class Kiosk {
                 System.out.println("1. 전체 삭제    | 2. 특정 주문만 삭제");
                 int checkRemoveRange = checkYesOrNo();
                 if (checkRemoveRange == 1) {
+                    // 전체 삭제 : 장바구니 초기화
                     cart.clearCart();
                     System.out.println("장바구니가 초기화되었습니다. 주문을 다시 시작합니다.");
                     delay(500);
                 } else if (checkRemoveRange == 2) {
+                    // 특정 주문만 삭제 : 원하는 번호 받은 뒤, 해당 메뉴 삭제
                     cart.printCartItems();
                     int removeIndex = getNumber("삭제하고 싶은 메뉴의", cart.getCartItems().size());
                     cart.removeItem(removeIndex-1);
@@ -121,8 +125,13 @@ public class Kiosk {
     // printMenuItems(Menu) : Menu 객체로 받은 MenuItem 출력
     private void printMenuItems(Menu menu) {
         System.out.println("[ " + menu + " MENU ]");
-        menu.printMenus();
-        System.out.println("0. 뒤로 가기");
+        try {
+            menu.printMenus();
+        } catch (NullPointerException e) {
+            System.out.println("준비 중인 메뉴입니다.");
+        } finally {
+            System.out.println("0. 뒤로 가기");
+        }
     }
 
     // getNumber(String, int) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
