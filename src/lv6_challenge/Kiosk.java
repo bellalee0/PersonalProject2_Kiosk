@@ -135,16 +135,16 @@ public class Kiosk {
     }
 
     // getNumber(String, int) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
-    private int getNumber(String name, int maximunRange) {
+    private int getNumber(String name, int maximumRange) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print(name + " 번호를 입력하세요: ");
             try {
                 int selectedNumber = scanner.nextInt();
-                if (selectedNumber < 0 || selectedNumber > maximunRange) { System.out.println("1부터 " + maximunRange + "까지의 번호를 입력해주세요."); }
+                if (selectedNumber < 0 || selectedNumber > maximumRange) { System.out.println("1부터 " + maximumRange + "까지의 번호를 입력해주세요."); }
                 else return selectedNumber;
             } catch (InputMismatchException e) {
-                System.out.println("1부터 " + maximunRange + "까지의 번호를 입력해주세요.");
+                System.out.println("1부터 " + maximumRange + "까지의 번호를 입력해주세요.");
                 scanner.next();
             }
         }
