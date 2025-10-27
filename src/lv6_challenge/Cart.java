@@ -31,4 +31,14 @@ public class Cart {
     boolean isEmpty() {
         return this.cartItems.isEmpty();
     }
+
+    // 장바구니 비우기
+    void clearCart() {
+        this.cartItems.clear();
+    }
+
+    // 원하는 항목만 삭제하기
+    void removeItem(int index) {
+        this.cartItems.remove(index);
+    }
 }
