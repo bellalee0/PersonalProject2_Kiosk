@@ -15,9 +15,9 @@ public class Cart {
         return this.cartItems;
     }
 
-    // MenuItem 객체들을 List로 받아서 carItems 리스트에 저장
-    void saveItems(List<MenuItem> menus) {
-        this.cartItems = new ArrayList<>(menus);
+    // MenuItem 객체를 cartItems 리스트에 저장
+    void saveItem(MenuItem menuItem) {
+        this.cartItems.add(menuItem);
     }
 
     // 리스트에 있는 CartItem을 순차적으로 프린트
