@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Cart {
     // 속성
-    private List<MenuItem> cartItems;
+    private List<MenuItem> cartItems = new ArrayList<>();
 
     // 생성자
 
