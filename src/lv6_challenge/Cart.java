@@ -41,4 +41,8 @@ public class Cart {
     void removeItem(int index) {
         this.cartItems.remove(index);
     }
+
+    double getTotalPrice() {
+        return this.cartItems.stream().mapToDouble(MenuItem::getPrice).sum();
+    }
 }
