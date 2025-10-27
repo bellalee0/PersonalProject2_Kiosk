@@ -26,43 +26,50 @@ public class Kiosk {
                 execution = false;
             // 범위 내 숫자 입력 시
             } else if (selectedCategoryNumber >= 1 && selectedCategoryNumber <= categories.size()) {
-                int order;
                 boolean ordering = true;
                 while (ordering) {
                     // 해당 번호의 메뉴 출력
                     printMenuItems(categories.get(selectedCategoryNumber - 1));
                     // 메뉴 번호 입력받기 : getNumber(제목(메뉴), menuItem 리스트)
                     int selectedOrderNumber = getNumber("메뉴", categories.get(selectedCategoryNumber - 1).getMenu().size());
-                    // 0 입력 시 : while문 빠져나오며 카테고리 입력으로 되돌아감
+                    // 0(뒤로 가기) 입력 시 : while문 빠져나오며 카테고리 입력으로 되돌아감
                     if (selectedOrderNumber == 0) {
                         System.out.println("MAIN MENU로 돌아갑니다.");
-                        try {
-                            Thread.sleep(500); // 딜레이 0.5 초
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delay(300);
                         ordering = false;
                     // 범위 내 숫자 입력 시
                     } else if (selectedOrderNumber >= 1 || selectedOrderNumber <= categories.get(selectedCategoryNumber - 1).getMenu().size()) {
                         // 주문 내용 프린트
                         System.out.println("주문 내용: " + categories.get(selectedCategoryNumber - 1).getMenu().get(selectedOrderNumber-1));
-                        try {
-                            Thread.sleep(500); // 딜레이 0.5 초
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        delay(500);
                         System.out.println("위 내용을 장바구니에 추가하시겠습니까?");
                         System.out.println("1. 확인      | 2. 취소");
-                        Scanner scanner = new Scanner(System.in);
-                        int checkAddingToCart = scanner.nextInt();
+                        int checkAddingToCart = checkAddingToCart();
                         if (checkAddingToCart == 1) {
                             cart.saveItem(categories.get(selectedCategoryNumber - 1).getMenu().get(selectedOrderNumber-1));
                             cart.printCartItems();
+                            System.out.println("장바구니에 추가되었습니다.");
+                            System.out.println("MAIN MENU로 돌아갑니다.");
+                            delay(500);
+                            ordering = false;
+                        } else if (checkAddingToCart == 2) {
+                            System.out.println("주문을 취소합니다.");
+                            System.out.println("MAIN MENU로 돌아갑니다.");
+                            delay(500);
+                            ordering = false;
                         }
                     }
                 }
-            }  else if (selectedCategoryNumber == categories.size()+1 || selectedCategoryNumber == categories.size()+2) {
-                System.out.println(selectedCategoryNumber + " 입력함.");
+            } else if (selectedCategoryNumber == categories.size()+1) {
+                // [Order Menu]의 Orders 선택 시
+                System.out.println("[ Orders ]");
+                cart.printCartItems();
+                System.out.println("\n[ Total ]");
+                // 총 금액 출력
+                System.out.println("주문하시겠습니까?");
+                System.out.println("1. 확인      | 2. 취소");
+            } else if (selectedCategoryNumber == categories.size()+2) {
+                // [Order Menu]의 Cancel 선택 시
             }
         }
     }
@@ -103,6 +110,31 @@ public class Kiosk {
                 System.out.println("1부터 " + maximunRange + "까지의 번호를 입력해주세요.");
                 scanner.next();
             }
+        }
+    }
+
+    // checkAddingToCart() : 주문(1), 주문 취소(2) 외 숫자 및 다른 자료형 예외 처리
+    private int checkAddingToCart() {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            try {
+                int checkAddingToCart = scanner.nextInt();
+                if (checkAddingToCart < 1 && checkAddingToCart > 2) { System.out.println("1 또는 2를 입력해주세요."); }
+                else return checkAddingToCart;
+            } catch (InputMismatchException e) {
+                System.out.println("1 또는 2를 입력해주세요.");
+                scanner.next();
+            }
+        }
+
+    }
+
+    // delay(int) : 이후 명령 실행까지 딜레이 걸기
+    private void delay(int milliseconds) {
+        try {
+            Thread.sleep(milliseconds); // 딜레이 0.5 초
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
