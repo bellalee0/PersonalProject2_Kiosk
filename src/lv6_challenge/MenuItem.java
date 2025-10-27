@@ -10,7 +10,7 @@ public class MenuItem {
     MenuItem() {}
 
     MenuItem(String name, String price, String description) {
-        if (name.trim().isEmpty() || price.trim().isEmpty()) throw new IllegalArgumentException("메뉴명과 가격은 필수입니다.");
+        if (name.trim().isEmpty() || price.trim().isEmpty()) { throw new IllegalArgumentException("메뉴명과 가격은 필수입니다."); }
         this.name = name;
         this.price = Double.parseDouble(price);
         this.description = description;
@@ -24,7 +24,7 @@ public class MenuItem {
     }
 
     void setMenuItem(String name, String price, String description) {
-        if (name.trim().isEmpty() || name == null || price.trim().isEmpty() || price == null) throw new IllegalArgumentException("메뉴명과 가격은 필수입니다.");
+        if (name.trim().isEmpty() || name == null || price.trim().isEmpty() || price == null) { throw new IllegalArgumentException("메뉴명과 가격은 필수입니다."); }
         this.name = name;
         this.price = Double.parseDouble(price);
         this.description = description;
