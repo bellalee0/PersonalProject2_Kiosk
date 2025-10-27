@@ -9,6 +9,9 @@ public class Kiosk {
     // start() : 스캐너로 주문 번호 받기 → 입력된 내용에 따라 결과 출력
     public void start(List<Menu> menuCategories) {
         List<Menu> categories = new ArrayList<Menu>(menuCategories);
+        // Cart 객체 생성
+        Cart cart = new Cart();
+        // execution : start() 메서드 진행 여부 (false가 될 시, start() 메서드 종료)
         boolean execution = true;
 
         while (execution) {
@@ -23,11 +26,11 @@ public class Kiosk {
                 execution = false;
             // 범위 내 숫자 입력 시
             } else if (selectedCategoryNumber >= 1 || selectedCategoryNumber <= categories.size()) {
-                // 해당 번호의 메뉴 출력
-                printMenuItems(categories.get(selectedCategoryNumber - 1));
                 int order;
                 boolean ordering = true;
                 while (ordering) {
+                    // 해당 번호의 메뉴 출력
+                    printMenuItems(categories.get(selectedCategoryNumber - 1));
                     // 메뉴 번호 입력받기 : getNumber(제목(메뉴), menuItem 리스트)
                     int selectedOrderNumber = getNumber("메뉴", categories.get(selectedCategoryNumber - 1).getMenu());
                     // 0 입력 시 : while문 빠져나오며 카테고리 입력으로 되돌아감
@@ -48,8 +51,14 @@ public class Kiosk {
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-                        // 메뉴 리스트 재출력 → while문 처음으로 돌아가 메뉴 번호 다시 입력 받기
-                        printMenuItems(categories.get(selectedCategoryNumber - 1));
+                        System.out.println("위 내용을 장바구니에 추가하시겠습니까?");
+                        System.out.println("1. 확인      | 2. 취소");
+                        Scanner scanner = new Scanner(System.in);
+                        int checkAddingToCart = scanner.nextInt();
+                        if (checkAddingToCart == 1) {
+                            cart.saveItem(categories.get(selectedCategoryNumber - 1).getMenu().get(selectedOrderNumber-1));
+                            cart.printCartItems();
+                        }
                     }
                 }
             }
