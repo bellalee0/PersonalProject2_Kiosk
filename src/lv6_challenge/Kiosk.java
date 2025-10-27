@@ -16,23 +16,23 @@ public class Kiosk {
 
         while (execution) {
             // 카테고리 출력
-            printCategories(categories);
+            int categoryRange = printCategories(categories, cart);
             // 카테고리 번호 입력받기 : getNumber(제목(카테고리), menu 리스트)
-            int selectedCategoryNumber = getNumber("카테고리", categories);
+            int selectedCategoryNumber = getNumber("카테고리", categoryRange);
             // 입력된 카테고리 번호 처리
             // 0 입력 시 : while문에서 빠져나오며 프로그램 종료
             if (selectedCategoryNumber == 0) {
                 System.out.println("프로그램을 종료합니다.");
                 execution = false;
             // 범위 내 숫자 입력 시
-            } else if (selectedCategoryNumber >= 1 || selectedCategoryNumber <= categories.size()) {
+            } else if (selectedCategoryNumber >= 1 && selectedCategoryNumber <= categories.size()) {
                 int order;
                 boolean ordering = true;
                 while (ordering) {
                     // 해당 번호의 메뉴 출력
                     printMenuItems(categories.get(selectedCategoryNumber - 1));
                     // 메뉴 번호 입력받기 : getNumber(제목(메뉴), menuItem 리스트)
-                    int selectedOrderNumber = getNumber("메뉴", categories.get(selectedCategoryNumber - 1).getMenu());
+                    int selectedOrderNumber = getNumber("메뉴", categories.get(selectedCategoryNumber - 1).getMenu().size());
                     // 0 입력 시 : while문 빠져나오며 카테고리 입력으로 되돌아감
                     if (selectedOrderNumber == 0) {
                         System.out.println("MAIN MENU로 돌아갑니다.");
@@ -61,17 +61,26 @@ public class Kiosk {
                         }
                     }
                 }
+            }  else if (selectedCategoryNumber == categories.size()+1 || selectedCategoryNumber == categories.size()+2) {
+                System.out.println(selectedCategoryNumber + " 입력함.");
             }
         }
     }
 
-    // printCategories(List<Menu>) : Menu 객체들의 카테고리 이름 출력
-    private void printCategories(List<Menu> categories) {
+    // printCategories(List<Menu>, Cart) : Menu 객체들의 카테고리 이름 출력, Cart가 비어있지 않으면 [Order Menu]도 함께 출력
+    private int printCategories(List<Menu> categories, Cart cart) {
         System.out.println("[ MAIN MENU ]");
-        for (int i = 1; i <= categories.size(); i++) {
-            System.out.println(i + ". " + categories.get(i - 1));
+        int i = 0;
+        for (Menu menu : categories) {
+            System.out.println(++i + ". " + menu);
         }
         System.out.println("0. 종료");
+        if (!cart.isEmpty()) {
+            System.out.println("\n[ ORDER MENU ]");
+            System.out.println(++i + ". Orders     | 장바구니를 확인 후 주문합니다.");
+            System.out.println(++i + ". Cancel     | 진행 중인 주문을 취소합니다.");
+        }
+        return i;
     }
 
     // printMenuItems(Menu) : Menu 객체로 받은 MenuItem 출력
@@ -81,17 +90,17 @@ public class Kiosk {
         System.out.println("0. 뒤로 가기");
     }
 
-    // getNumber(String, List<?>) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
-    private int getNumber(String name, List<?> nameOfList) {
+    // getNumber(String, int) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
+    private int getNumber(String name, int maximunRange) {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print(name + " 번호를 입력하세요: ");
             try {
                 int selectedNumber = scanner.nextInt();
-                if (selectedNumber < 0 || selectedNumber > nameOfList.size()) { System.out.println("1부터 " + nameOfList.size() + "까지의 번호를 입력해주세요."); }
+                if (selectedNumber < 0 || selectedNumber > maximunRange) { System.out.println("1부터 " + maximunRange + "까지의 번호를 입력해주세요."); }
                 else return selectedNumber;
             } catch (InputMismatchException e) {
-                System.out.println("1부터 " + nameOfList.size() + "까지의 번호를 입력해주세요.");
+                System.out.println("1부터 " + maximunRange + "까지의 번호를 입력해주세요.");
                 scanner.next();
             }
         }
