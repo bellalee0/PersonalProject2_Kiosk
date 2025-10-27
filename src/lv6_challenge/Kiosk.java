@@ -44,7 +44,7 @@ public class Kiosk {
                         delay(500);
                         System.out.println("위 내용을 장바구니에 추가하시겠습니까?");
                         System.out.println("1. 확인      | 2. 취소");
-                        int checkAddingToCart = checkAddingToCart();
+                        int checkAddingToCart = checkYesOrNo();
                         if (checkAddingToCart == 1) {
                             cart.saveItem(categories.get(selectedCategoryNumber - 1).getMenu().get(selectedOrderNumber-1));
                             cart.printCartItems();
@@ -67,9 +67,37 @@ public class Kiosk {
                 System.out.println("\n[ Total ]");
                 // 총 금액 출력
                 System.out.println("주문하시겠습니까?");
-                System.out.println("1. 확인      | 2. 취소");
+                System.out.println("1. 확인      | 2. 취소 (장바구니 초기화)");
+                int checkAddingToCart = checkYesOrNo();
+                if (checkAddingToCart == 1) {
+                    // 최종 금액 출력 후 프로세스 종료
+                    System.out.println("주문이 완료되었습니다. 총 n개 메뉴, 금액은 W --- 입니다.");
+                    execution = false;
+                } else if (checkAddingToCart == 2) {
+                    // 장바구니 초기화
+                    cart.clearCart();
+                    System.out.println("장바구니가 초기화되었습니다. 주문을 다시 시작합니다.");
+                    delay(500);
+                }
             } else if (selectedCategoryNumber == categories.size()+2) {
                 // [Order Menu]의 Cancel 선택 시
+                // 장바구니 전체 초기화 + 원하는 메뉴만 삭제
+                System.out.println("원하는 작업을 선택해주세요.");
+                System.out.println("1. 전체 삭제    | 2. 특정 주문만 삭제");
+                int checkRemoveRange = checkYesOrNo();
+                if (checkRemoveRange == 1) {
+                    cart.clearCart();
+                    System.out.println("장바구니가 초기화되었습니다. 주문을 다시 시작합니다.");
+                    delay(500);
+                } else if (checkRemoveRange == 2) {
+                    cart.printCartItems();
+                    int removeIndex = getNumber("삭제하고 싶은 메뉴의", cart.getCartItems().size());
+                    cart.removeItem(removeIndex-1);
+                    delay(300);
+                    cart.printCartItems();
+                    System.out.println("선택한 메뉴가 삭제되었습니다. 주문을 다시 시작합니다.");
+                    delay(500);
+                }
             }
         }
     }
@@ -113,14 +141,14 @@ public class Kiosk {
         }
     }
 
-    // checkAddingToCart() : 주문(1), 주문 취소(2) 외 숫자 및 다른 자료형 예외 처리
-    private int checkAddingToCart() {
+    // checkYesOrNo() : 주문(1), 주문 취소(2) 외 숫자 및 다른 자료형 예외 처리
+    private int checkYesOrNo() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
-                int checkAddingToCart = scanner.nextInt();
-                if (checkAddingToCart < 1 && checkAddingToCart > 2) { System.out.println("1 또는 2를 입력해주세요."); }
-                else return checkAddingToCart;
+                int checkYesOrNo = scanner.nextInt();
+                if (checkYesOrNo < 1 && checkYesOrNo > 2) { System.out.println("1 또는 2를 입력해주세요."); }
+                else return checkYesOrNo;
             } catch (InputMismatchException e) {
                 System.out.println("1 또는 2를 입력해주세요.");
                 scanner.next();
