@@ -32,11 +32,21 @@ public class Kiosk {
                     // 0 입력 시 : while문 빠져나오며 카테고리 입력으로 되돌아감
                     if (selectedOrderNumber == 0) {
                         System.out.println("MAIN MENU로 돌아갑니다.");
+                        try {
+                            Thread.sleep(500); // 딜레이 0.5 초
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         ordering = false;
                     // 범위 내 숫자 입력 시
                     } else if (selectedOrderNumber >= 1 || selectedOrderNumber <= categories.get(selectedCategoryNumber - 1).getMenu().size()) {
                         // 주문 내용 프린트
                         System.out.println("주문 내용: " + categories.get(selectedCategoryNumber - 1).getMenu().get(selectedOrderNumber-1));
+                        try {
+                            Thread.sleep(500); // 딜레이 0.5 초
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         // 메뉴 리스트 재출력 → while문 처음으로 돌아가 메뉴 번호 다시 입력 받기
                         printMenuItems(categories.get(selectedCategoryNumber - 1));
                     }
