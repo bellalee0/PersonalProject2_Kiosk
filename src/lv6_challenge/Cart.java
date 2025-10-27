@@ -42,6 +42,7 @@ public class Cart {
         this.cartItems.remove(index);
     }
 
+    // 장바구니 내 메뉴의 총액 출력
     double getTotalPrice() {
         return this.cartItems.stream().mapToDouble(MenuItem::getPrice).sum();
     }
