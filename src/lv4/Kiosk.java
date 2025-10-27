@@ -41,13 +41,14 @@ public class Kiosk {
     // start() : 스캐너로 주문 번호 받기 → 입력된 내용에 따라 결과 출력
     public void start(List<Menu> menuCategories) {
         List<Menu> categories = new ArrayList<Menu>(menuCategories);
+        boolean execution = true;
 
-        while (true) {
+        while (execution) {
             printCategories(categories);
             int selectedCategoryNumber = getNumber("카테고리", categories);
             if (selectedCategoryNumber == 0) {
                 System.out.println("프로그램을 종료합니다.");
-                break;
+                execution = false;
             } else if (selectedCategoryNumber >= 1 || selectedCategoryNumber <= categories.size()) {
                 printMenuItems(categories.get(selectedCategoryNumber - 1));
                 int order;

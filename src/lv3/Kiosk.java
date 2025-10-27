@@ -26,13 +26,14 @@ public class Kiosk {
         System.out.println("0. 종료");
 
         int order;
-        while (true) {
+        boolean execution = true;
+        while (execution) {
             System.out.print("주문 번호를 입력하세요: ");
             try {
                 order = scanner.nextInt();
                 if (order == 0) {
                     System.out.println("프로그램을 종료합니다.");
-                    break;
+                    execution = false;
                 } else if (order >= 1 && order <= menuItems.size()) {
                     System.out.println("주문 내용: " + menuItems.get(order-1));
                 } else {

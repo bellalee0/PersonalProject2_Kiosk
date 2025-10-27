@@ -9,8 +9,9 @@ public class Kiosk {
     // start() : 스캐너로 주문 번호 받기 → 입력된 내용에 따라 결과 출력
     public void start(List<Menu> menuCategories) {
         List<Menu> categories = new ArrayList<Menu>(menuCategories);
+        boolean execution = true;
 
-        while (true) {
+        while (execution) {
             // 카테고리 출력
             printCategories(categories);
             // 카테고리 번호 입력받기 : getNumber(제목(카테고리), menu 리스트)
@@ -19,7 +20,7 @@ public class Kiosk {
             // 0 입력 시 : while문에서 빠져나오며 프로그램 종료
             if (selectedCategoryNumber == 0) {
                 System.out.println("프로그램을 종료합니다.");
-                break;
+                execution = false;
             // 범위 내 숫자 입력 시
             } else if (selectedCategoryNumber >= 1 || selectedCategoryNumber <= categories.size()) {
                 // 해당 번호의 메뉴 출력
