@@ -29,4 +29,9 @@ public class MenuItem {
         this.price = Double.parseDouble(price);
         this.description = description;
     }
+
+    // getter
+    String getName() { return name; }
+    double getPrice() { return price; }
+    String getDescription() { return description; }
 }
