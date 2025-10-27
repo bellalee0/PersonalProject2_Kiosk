@@ -21,12 +21,12 @@
 ### ✅ Lv 4. 객체 지향 설계를 적용해 음식 메뉴와 주문 내역을 클래스 기반으로 관리하기
 1. `Menu` 클래스 생성 : MenuItem 클래스를 관리하는 클래스
 
-
-<img width="800" height="323" alt="Image" src="https://github.com/user-attachments/assets/8536c27a-6a25-4259-8254-e81ead214c65" />
-
-### Lv 5. 캡슐화 적용하기
+### ✅ Lv 5. 캡슐화 적용하기
 1. `MenuItem`, `Menu`, `Kiosk` 클래스의 필드에 직접 접근하지 못하도록 설정
 2. Getter와 Setter 메서드를 사용해 데이터 관리
+
+
+<img width="800" height="326" alt="Image" src="https://github.com/user-attachments/assets/603fa382-8f7d-4f52-8de9-cdaee1495e67" />
 
 ### (도전) Lv 6. 장바구니 및 구매하기 기능을 추가하기
 1. 장바구니 생성 및 관리 기능
