@@ -26,4 +26,9 @@ public class Cart {
             System.out.println(i + ". " + cartItems.get(i - 1));
         }
     }
+
+    // Empty 여부
+    boolean isEmpty() {
+        return this.cartItems.isEmpty();
+    }
 }
