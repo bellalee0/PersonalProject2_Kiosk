@@ -31,8 +31,8 @@
 3. 주문 기능
 
 
-<img width="500" height="361" alt="Image" src="https://github.com/user-attachments/assets/97a46366-9f7e-4b8a-bdcb-a18918aee9b0" />
-<img width="500" height="461" alt="Image" src="https://github.com/user-attachments/assets/9e48f1c2-6001-4ed9-8cc2-1c9852db85a3" />
+<img width="700" height="505" alt="Image" src="https://github.com/user-attachments/assets/97a46366-9f7e-4b8a-bdcb-a18918aee9b0" />
+<img width="1750" height="920" alt="Image" src="https://github.com/user-attachments/assets/b8ed2c3d-580c-48e6-a113-ac3df0cf35ba" />
 
 ### (도전) Lv 7. Enum, 람다 & 스트림을 활용한 주문 및 장바구니 관리
 1. Enum을 활용한 사용자 유형별 할인율 관리
