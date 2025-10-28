@@ -25,13 +25,14 @@
 1. `MenuItem`, `Menu`, `Kiosk` 클래스의 필드에 직접 접근하지 못하도록 설정
 2. Getter와 Setter 메서드를 사용해 데이터 관리
 
-
-<img width="800" height="326" alt="Image" src="https://github.com/user-attachments/assets/603fa382-8f7d-4f52-8de9-cdaee1495e67" />
-
-### (도전) Lv 6. 장바구니 및 구매하기 기능을 추가하기
+### ✅ (도전) Lv 6. 장바구니 및 구매하기 기능을 추가하기
 1. 장바구니 생성 및 관리 기능
 2. 장바구니 담기 기능
 3. 주문 기능
+
+
+<img width="500" height="361" alt="Image" src="https://github.com/user-attachments/assets/97a46366-9f7e-4b8a-bdcb-a18918aee9b0" />
+<img width="500" height="461" alt="Image" src="https://github.com/user-attachments/assets/9e48f1c2-6001-4ed9-8cc2-1c9852db85a3" />
 
 ### (도전) Lv 7. Enum, 람다 & 스트림을 활용한 주문 및 장바구니 관리
 1. Enum을 활용한 사용자 유형별 할인율 관리
