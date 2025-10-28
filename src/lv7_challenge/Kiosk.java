@@ -1,5 +1,6 @@
 package lv7_challenge;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -72,8 +73,10 @@ public class Kiosk {
                 System.out.println("1. 확인      | 2. 취소 (장바구니 초기화)");
                 int checkAddingToCart = checkYesOrNo();
                 if (checkAddingToCart == 1) {
-                    // 주문 O : 최종 금액 출력 후 프로세스 종료
-                    System.out.println("주문이 완료되었습니다. 총 " + cart.getCartItems().size() + "개 메뉴, 금액은 W " + cart.getTotalPrice() + " 입니다.");
+                    // 주문 O : 할인 정보 입력 받고, 최종 금액 출력 후 프로그램 종료
+                    BigDecimal finalPrice = getDiscount(cart.getTotalPrice());
+                    System.out.println("주문이 완료되었습니다. 총 " + cart.getCartItems().size() + "개 항목, 할인 적용 후 최종 금액은 ₩ " + finalPrice + "입니다.");
+                    delay(500);
                     System.out.println("프로그램이 종료됩니다.");
                     execution = false;
                 } else if (checkAddingToCart == 2) {
@@ -127,6 +130,33 @@ public class Kiosk {
         System.out.println("[ " + menu + " MENU ]");
         menu.printMenus();
         System.out.println("0. 뒤로 가기");
+    }
+
+    // UserType 출력 후 입력받고, UserType 반환받기 → 할인율 적용하여 최종 금액 계산 후 반환
+    private BigDecimal getDiscount(BigDecimal totalPrice) {
+        System.out.println("할인 정보를 입력해주세요.");
+        System.out.println("1. 국가유공자  : 10%\n" +
+                "2. 군인      : 5%\n" +
+                "3. 학생      : 3%\n" +
+                "4. 일반      : 0%");
+        Scanner scanner = new Scanner(System.in);
+        int selectedNumber = 4;
+        boolean getNumber = false;
+        while (!getNumber) {
+            try {
+                selectedNumber = scanner.nextInt();
+                if (selectedNumber >= 1 || selectedNumber <= 4) {
+                    getNumber = true;
+                } else {
+                    System.out.println("1부터 4까지의 번호를 입력해주세요.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("1부터 4까지의 번호를 입력해주세요.");
+                scanner.next();
+            }
+        }
+        UserType userType = UserType.findUserType(selectedNumber);
+        return userType.apply(totalPrice);
     }
 
     // getNumber(String, int) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
