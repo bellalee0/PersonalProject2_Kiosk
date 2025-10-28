@@ -67,7 +67,7 @@ public class Kiosk {
                 System.out.println("[ Orders(" + cart.getCartItems().size() + ") ]");
                 cart.printCartItems();
                 System.out.println("[ Total ]");
-                System.out.println("W" + cart.getTotalPrice());
+                System.out.println("W " + cart.getTotalPrice());
                 System.out.println("주문하시겠습니까?");
                 System.out.println("1. 확인      | 2. 취소 (장바구니 초기화)");
                 int checkAddingToCart = checkYesOrNo();
