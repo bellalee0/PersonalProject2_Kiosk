@@ -3,6 +3,7 @@ package lv7_challenge;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Menu {
     // 속성
@@ -28,8 +29,7 @@ public class Menu {
 
     // 리스트에 있는 MenuItem을 순차적으로 프린트
     void printMenus() {
-        for (int i = 1; i <= menuItems.size(); i++) {
-            System.out.println(i + ". " + menuItems.get(i - 1));
-        }
+        IntStream.range(1, menuItems.size())
+                .forEach(i -> System.out.println(i + ". " + menuItems.get(i-1)));
     }
 }
