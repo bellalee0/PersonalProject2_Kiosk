@@ -125,13 +125,8 @@ public class Kiosk {
     // printMenuItems(Menu) : Menu 객체로 받은 MenuItem 출력
     private void printMenuItems(Menu menu) {
         System.out.println("[ " + menu + " MENU ]");
-        try {
-            menu.printMenus();
-        } catch (NullPointerException e) {
-            System.out.println("준비 중인 메뉴입니다.");
-        } finally {
-            System.out.println("0. 뒤로 가기");
-        }
+        menu.printMenus();
+        System.out.println("0. 뒤로 가기");
     }
 
     // getNumber(String, int) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
