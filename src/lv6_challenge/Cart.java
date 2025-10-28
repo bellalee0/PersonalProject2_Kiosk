@@ -1,6 +1,7 @@
 package lv6_challenge;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Cart {
@@ -12,7 +13,7 @@ public class Cart {
     // 기능
     // getter
     List<MenuItem> getCartItems() {
-        return this.cartItems;
+        return cartItems.isEmpty() ? Collections.emptyList() : this.cartItems;
     }
 
     // MenuItem 객체를 cartItems 리스트에 저장
