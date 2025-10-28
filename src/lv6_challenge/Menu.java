@@ -1,6 +1,7 @@
 package lv6_challenge;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Menu {
@@ -11,6 +12,7 @@ public class Menu {
     // 생성자(오버라이드)
     Menu(String categoryName) {
         this.categoryName = categoryName;
+        this.menuItems = new ArrayList<>();
     }
 
     // toString 오버라이드
@@ -18,7 +20,7 @@ public class Menu {
     public String toString() { return categoryName.toUpperCase(); }
 
     List<MenuItem> getMenu() {
-        return this.menuItems;
+        return menuItems.isEmpty() ? Collections.emptyList() : this.menuItems;
     }
 
     // MenuItem 객체를 리스트에 저작
