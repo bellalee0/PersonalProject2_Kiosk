@@ -1,5 +1,6 @@
 package lv6_challenge;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -44,7 +45,11 @@ public class Cart {
     }
 
     // 장바구니 내 메뉴의 총액 출력
-    double getTotalPrice() {
-        return this.cartItems.stream().mapToDouble(MenuItem::getPrice).sum();
+    BigDecimal getTotalPrice() {
+        BigDecimal totalPrice = new BigDecimal("0");
+        for (int i = 0; i < this.cartItems.size(); i++) {
+            totalPrice = totalPrice.add(this.cartItems.get(i).getPrice());
+        }
+        return totalPrice;
     }
 }
