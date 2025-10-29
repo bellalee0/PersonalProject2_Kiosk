@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Kiosk {
     // start() : 스캐너로 주문 번호 받기 → 입력된 내용에 따라 결과 출력
@@ -60,12 +61,13 @@ public class Kiosk {
                 // 주문 내용 프린트
                 System.out.println("주문 내용: " + menu.getMenu().get(selectedOrderNumber-1));
                 delay(500);
-                addToCart(cart, menu.getMenu().get(selectedOrderNumber-1), ordering);
+                addToCart(cart, menu.getMenu().get(selectedOrderNumber-1));
+                ordering = false;
             }
         }
     }
     // addToCart(Cart, MenuItem, boolean) : 장바구니에 추가 여부 묻고, 추가하면 추가한 뒤에, 아니면 바로 메인 메뉴로 돌아가기
-    private void addToCart(Cart cart, MenuItem menuItem, boolean ordering) {
+    private void addToCart(Cart cart, MenuItem menuItem) {
         System.out.println("위 내용을 장바구니에 추가하시겠습니까?");
         System.out.println("1. 확인      | 2. 취소");
         int checkAddingToCart = checkYesOrNo();
@@ -76,13 +78,11 @@ public class Kiosk {
             System.out.println("장바구니에 추가되었습니다.");
             System.out.println("MAIN MENU로 돌아갑니다.");
             delay(500);
-            ordering = false;
         } else if (checkAddingToCart == 2) {
             // 장바구니에 추가 X
             System.out.println("주문을 취소합니다.");
             System.out.println("MAIN MENU로 돌아갑니다.");
             delay(500);
-            ordering = false;
         }
     }
     // getNumber(String, int) : 숫자를 입력하고, 범위 외 숫자 혹은 다른 자료형 예외 처리
@@ -163,15 +163,46 @@ public class Kiosk {
         } else if (checkRemoveRange == 2) {
             // 특정 주문만 삭제 : 원하는 번호 받은 뒤, 해당 메뉴 삭제
             cart.printCartItems();
-            int removeIndex = getNumber("삭제하고 싶은 메뉴의", cart.getCartItems().size());
-            cart.removeItem(removeIndex-1);
+            String removeItem = getCancelItem(cart);
+            if (isInteger(removeItem)) {
+                cart.removeItem(Integer.parseInt(removeItem)-1);
+            } else {
+                cart.removeItem(removeItem);
+            }
             delay(300);
             cart.printCartItems();
             System.out.println("선택한 메뉴가 삭제되었습니다. 주문을 다시 시작합니다.");
             delay(500);
         }
     }
-
+    // getCancelItem(Cart) : 메뉴의 번호 또는 메뉴명 입력받기 (번호 범위 혹은 메뉴명 불일치 시 InputMismatchException로 다시 실행)
+    private String getCancelItem(Cart cart) {
+        Scanner scanner = new Scanner(System.in);
+        while (true) {
+            System.out.print("삭제하고 싶은 메뉴의 번호 또는 메뉴명을 입력하세요: ");
+            try {
+                String cancelItem = scanner.nextLine();
+                if (isInteger(cancelItem)) {
+                    if (Integer.parseInt(cancelItem) < 0 || Integer.parseInt(cancelItem) > cart.getCartItems().size()) { throw new InputMismatchException(); }
+                    else return cancelItem;
+                } else if (cart.getCartItems().stream().map(menuItem -> menuItem.getName()).collect(Collectors.toList()).contains(cancelItem)) {
+                    return cancelItem;
+                } else { throw new InputMismatchException(); }
+            } catch (InputMismatchException e) {
+                System.out.println("잘못된 입력입니다.");
+                scanner.next();
+            }
+        }
+    }
+    // isInteger(String) : 입력된 문자열이 숫자인지 확인
+    private boolean isInteger(String input) {
+        try {
+            Integer.parseInt(input);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
     // checkYesOrNo() : 주문(1), 주문 취소(2) 외 숫자 및 다른 자료형 예외 처리
     // addToCart(), startOrdering(), startCancel에서 사용
