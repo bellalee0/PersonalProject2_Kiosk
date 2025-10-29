@@ -29,7 +29,7 @@ public class Menu {
 
     // 리스트에 있는 MenuItem을 순차적으로 프린트
     void printMenus() {
-        IntStream.range(1, menuItems.size())
+        IntStream.rangeClosed(1, menuItems.size())
                 .forEach(i -> System.out.println(i + ". " + menuItems.get(i-1)));
     }
 }
