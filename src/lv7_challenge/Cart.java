@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Cart {
     // 속성
@@ -42,6 +43,14 @@ public class Cart {
     // 원하는 항목만 삭제하기
     void removeItem(int index) {
         this.cartItems.remove(index);
+    }
+
+    // 원하는 항목만 삭제하기2
+    void removeItem(String menuName) {
+        this.cartItems.stream()
+                .filter(menuItem -> menuItem.getName().equals(menuName)) // menuName과 이름이 같은 객체 filtering
+                .collect(Collectors.toList()) // filtering된 객체들을 리스트로 저장
+                .forEach(menu -> this.cartItems.remove(menu)); // 리스트로 저장된 menuItem 삭제하기
     }
 
     // 장바구니 내 메뉴의 총액 출력
