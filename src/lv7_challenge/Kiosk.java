@@ -32,7 +32,7 @@ public class Kiosk {
                 startCategory(cart, categories.get(selectedCategoryNumber - 1));
             } else if (selectedCategoryNumber == categories.size()+1) {
                 // [Order Menu]의 Orders 선택 시
-                startOrdering(cart, execution);
+                startOrdering(cart);
             } else if (selectedCategoryNumber == categories.size()+2) {
                 // [Order Menu]의 Cancel 선택 시
                 startCancel(cart);
@@ -103,8 +103,8 @@ public class Kiosk {
 
 
     // Orders 선택 처리용 메서드
-    // startOrdering(Cart, boolean) : 장바구니 리스트 출력 후 주문 여부 확인받아서 처리
-    private void startOrdering(Cart cart, boolean execution) {
+    // startOrdering(Cart) : 장바구니 리스트 출력 후 주문 여부 확인받아서 처리
+    private void startOrdering(Cart cart) {
         Display display = new Display();
         // 장바구니 리스트 출력 (메뉴 개수, 총 금액)
         display.printCartList(cart);
@@ -115,9 +115,10 @@ public class Kiosk {
             // 주문 O : 할인 정보 입력 받고, 최종 금액 출력 후 프로그램 종료
             BigDecimal finalPrice = getDiscount(cart.getTotalPrice());
             System.out.println("주문이 완료되었습니다. 총 " + cart.getCartItems().size() + "개 항목, 할인 적용 후 최종 금액은 ₩ " + finalPrice + "입니다.");
+            delay(300);
+            cart.clearCart();
+            System.out.println("장바구니가 초기화되었습니다. MAIN MENU로 돌아갑니다.");
             delay(500);
-            System.out.println("프로그램이 종료됩니다.");
-            execution = false;
         } else if (checkAddingToCart == 2) {
             // 주문 X : 장바구니 초기화
             cart.clearCart();
