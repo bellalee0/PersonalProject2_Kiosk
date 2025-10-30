@@ -30,12 +30,12 @@
 2. 장바구니 담기 기능
 3. 주문 기능
 
-
-<img width="700" height="505" alt="Image" src="https://github.com/user-attachments/assets/97a46366-9f7e-4b8a-bdcb-a18918aee9b0" />
-<img width="1750" height="920" alt="Image" src="https://github.com/user-attachments/assets/b8ed2c3d-580c-48e6-a113-ac3df0cf35ba" />
-
-### (도전) Lv 7. Enum, 람다 & 스트림을 활용한 주문 및 장바구니 관리
+### ✅ (도전) Lv 7. Enum, 람다 & 스트림을 활용한 주문 및 장바구니 관리
 1. Enum을 활용한 사용자 유형별 할인율 관리
 2. 람다 & 스트림을 활용한 장바구니 조회 기능
+
+
+<img width="700" height="556" alt="Image" src="https://github.com/user-attachments/assets/5c1365f2-391d-4b5f-9db4-54e1cde18cec" />
+<img width="1751" height="1070" alt="Image" src="https://github.com/user-attachments/assets/f3ffa945-904a-45cd-93bc-7fe00283c933" />
 
 자세한 내용은 [노션](https://road-cartoon-1a1.notion.site/2941d6e7a68c8019bd5efd6a9ca88bb4?source=copy_link)을 통해 작성해두었다
