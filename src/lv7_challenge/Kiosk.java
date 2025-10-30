@@ -92,10 +92,10 @@ public class Kiosk {
             System.out.print(name + " 번호를 입력하세요: ");
             try {
                 int selectedNumber = scanner.nextInt();
-                if (selectedNumber < 0 || selectedNumber > maximumRange) { System.out.println("1부터 " + maximumRange + "까지의 번호를 입력해주세요."); }
+                if (selectedNumber < 0 || selectedNumber > maximumRange) { System.out.println("0부터 " + maximumRange + "까지의 번호를 입력해주세요."); }
                 else return selectedNumber;
             } catch (InputMismatchException e) {
-                System.out.println("1부터 " + maximumRange + "까지의 번호를 입력해주세요.");
+                System.out.println("0부터 " + maximumRange + "까지의 번호를 입력해주세요.");
                 scanner.next();
             }
         }
@@ -183,11 +183,11 @@ public class Kiosk {
             try {
                 String cancelItem = scanner.nextLine();
                 if (isInteger(cancelItem)) {
-                    if (Integer.parseInt(cancelItem) < 0 || Integer.parseInt(cancelItem) > cart.getCartItems().size()) { throw new InputMismatchException(); }
+                    if (Integer.parseInt(cancelItem) < 0 || Integer.parseInt(cancelItem) > cart.getCartItems().size()) { System.out.println("잘못된 입력입니다."); }
                     else return cancelItem;
                 } else if (cart.getCartItems().stream().map(menuItem -> menuItem.getName()).collect(Collectors.toList()).contains(cancelItem)) {
                     return cancelItem;
-                } else { throw new InputMismatchException(); }
+                } else { System.out.println("잘못된 입력입니다."); }
             } catch (InputMismatchException e) {
                 System.out.println("잘못된 입력입니다.");
                 scanner.next();
@@ -211,7 +211,7 @@ public class Kiosk {
         while (true) {
             try {
                 int checkYesOrNo = scanner.nextInt();
-                if (checkYesOrNo < 1 && checkYesOrNo > 2) { System.out.println("1 또는 2를 입력해주세요."); }
+                if (checkYesOrNo < 1 || checkYesOrNo > 2) { System.out.println("1 또는 2를 입력해주세요."); }
                 else return checkYesOrNo;
             } catch (InputMismatchException e) {
                 System.out.println("1 또는 2를 입력해주세요.");
