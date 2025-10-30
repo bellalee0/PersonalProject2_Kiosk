@@ -153,6 +153,7 @@ public class Kiosk {
 
     // startCancel(Cart) : 전체 삭제 or 특정 주문만 삭제
     private void startCancel(Cart cart) {
+        Display display = new Display();
         System.out.println("원하는 작업을 선택해주세요.");
         System.out.println("1. 전체 삭제    | 2. 특정 주문만 삭제");
         int checkRemoveRange = checkYesOrNo();
@@ -171,6 +172,7 @@ public class Kiosk {
                 cart.removeItem(removeItem);
             }
             delay(300);
+            display.printCartList(cart);
             cart.printCartItems();
             System.out.println("선택한 메뉴가 삭제되었습니다. 주문을 다시 시작합니다.");
             delay(500);
